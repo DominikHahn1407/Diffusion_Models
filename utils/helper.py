@@ -61,3 +61,17 @@ def sample_images(model, noise_scheduler, device):
             residual = model(sample, t).sample
         sample = noise_scheduler.step(residual, t, sample).prev_sample
     return sample
+
+def corrupt(x, amount):
+    noise = torch.rand_like(x)
+    amount = amount.view(-1, 1, 1, 1)
+    return x * (1 - amount) + noise * amount
+
+def visualize_noise(x):
+    fig, axs = plt.subplots(2, 1, figsize=(12, 5))
+    axs[0].set_title("Input Data")
+    axs[0].imshow(torchvision.utils.make_grid(x)[0], cmap="Greys")
+    amount = torch.linspace(0, 1, x.shape[0])
+    noised_x = corrupt(x, amount)
+    axs[1].set_title('Corrupted Data')
+    axs[1].imshow(torchvision.utils.make_grid(noised_x)[0], cmap='Greys')
