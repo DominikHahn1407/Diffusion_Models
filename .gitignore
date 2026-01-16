@@ -1,0 +1,23 @@
+# === Daten ===
+# Ignoriere alles in data/ außer raw/
+data/*
+!data/raw/
+
+# === Modelle ===
+# Ignoriere alle Model-Dateien
+model/
+*.pth
+
+# === Python Cache ===
+__pycache__/
+*.pyc
+*.pyo
+
+# === Jupyter ===
+.ipynb_checkpoints/
+
+# === System ===
+.DS_Store
+
+*/pipeline
+pipeline/*
